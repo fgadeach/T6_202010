@@ -1,40 +1,46 @@
 package model.data_structures;
-public class Node <E extends Comparable<E>>
+public class Node <T>
 {
-	private Node<E > next;
-	private Node<E > back;
-	private E item;
-
-	public Node (E item) 
+	//ATRIBUTOS
+	private Node<T> siguiente;
+	private Node<T> anterior;
+	private T objeto;
+	
+	//CONSTRUCTOR
+	public Node (T objeto)
 	{
-		next = null;
-		back=null;
-		this.item = item;
+		siguiente = null;
+		anterior = null;
+		this.objeto = objeto;
 	}
-
-	public Node<E> getNext() 
+	
+	//METODOS
+	public Node<T> darSiguiente()
 	{
-		return next;
+		return siguiente;
 	}
-	public Node<E> getBack() 
+	public Node<T> darAnterior() 
 	{
-		return back;
+		return anterior;
 	}
-
-	public void setNextNode ( Node<E> next)
+	
+	public void cambiarSiguiente(Node<T> siguiente)
 	{
-		this.next = next;
+		this.siguiente = siguiente;
 	}
-	public void setBackNode ( Node<E> back)
+	
+	public void cambiarAnterior(Node<T> anterior)
 	{
-		this.back = back;
-	}	
-	public E getItem()
-	{
-		return item;
+		this.anterior = anterior;
 	}
-	public void setItem (E item) 
+	
+	public T darItem()
 	{
-		this.item = item;
+		return objeto;
+	}
+	
+	public void cambiarItem(T objeto)
+	{
+		this.objeto = objeto;
 	}
 }

@@ -1,45 +1,40 @@
 package model.data_structures;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
-import model.logic.Comparendos;
-
-public class MaxColaCP <T extends Comparable<T>> implements IMaxColaCP<T>{
-
-
+public class Queue <T extends Comparable<T>> implements IQueue<T>{
 	//ATRIBUTOS
 	private int tamano;
 	private Node<T> primerNode;
 	private Node<T> ultimoNode;
-
+	
 	//CONSTRUCTORES
-	public MaxColaCP()
+	public Queue()
 	{
 		primerNode = null;
 		ultimoNode = null;
 		tamano = 0;
 	}
-
-	public MaxColaCP(T item)
+	
+	public Queue(T item)
 	{
 		primerNode = new Node<T>(item);
 		ultimoNode = new Node<T>(item);
 		tamano =1;
 	}
-
+	
 	//METODOS
 	public Node<T> darPrimero()
 	{
 		return primerNode;
 	}
-
+	
 	public Node<T> darUltimo()
 	{
 		return ultimoNode;
 	}
-
-	public boolean esVacia() 
+	
+	public boolean isEmpty() 
 	{
 		boolean respuesta = false;	
 		if (tamano >= 1)
@@ -49,13 +44,14 @@ public class MaxColaCP <T extends Comparable<T>> implements IMaxColaCP<T>{
 		return respuesta;
 	}
 
-	public Integer darNumElementos() 
+	@Override
+	public int tamano() 
 	{
 		return tamano;
 	}
-
-
-	public void agregar(T t) 
+	
+	@Override
+	public void enqueue (T t) 
 	{
 		Node <T> contenedor = new Node <T>(t);
 		if (tamano == 0)
@@ -66,34 +62,36 @@ public class MaxColaCP <T extends Comparable<T>> implements IMaxColaCP<T>{
 		else
 		{
 			Node <T> ultimo = ultimoNode;
-			ultimo.setNextNode(contenedor);
+			ultimo.cambiarSiguiente(contenedor);
 			ultimoNode = contenedor;
 		}
-
+		
 		tamano++;
 	}
 
+	@Override
 	public T dequeue() 
 	{
 		T sacado = null;
-
+		
 		if (tamano ==0)
 		{
 			System.out.println("No hay elementos para quitar de la fila");
 		}
-
+		
 		else
 		{
 			Node <T> primero = primerNode;
-			sacado = primerNode.getItem();
-			primerNode = primero.getNext();
-			primero.setNextNode(null);
+			sacado = primerNode.darItem();
+			primerNode = primero.darSiguiente();
+			primero.cambiarSiguiente(null);
 			tamano --;
 		}
-
+		
 		return sacado;
 	}
 
+	@Override
 	public Iterator<T> iterator() 
 	{
 		return new Iterator<T>() {
@@ -104,12 +102,12 @@ public class MaxColaCP <T extends Comparable<T>> implements IMaxColaCP<T>{
 				if (tamano == 0) {
 					return false;
 				}
-
+				
 				if (act == null) {
 					return true;
 				}
-
-				return act.getNext() != null; 
+				
+				return act.darSiguiente() != null; 
 			}
 
 			@Override
@@ -117,43 +115,11 @@ public class MaxColaCP <T extends Comparable<T>> implements IMaxColaCP<T>{
 				if (act == null) {
 					act = primerNode;
 				} else {
-					act = act.getNext();
+					act = act.darSiguiente();
 				}
-
-				return act.getItem();
+				
+				return act.darItem();
 			}
 		};
-	}
-
-	public T sacarMax() 
-	{
-		if (esVacia()) {
-			return null;
-		}
-		T obj = darMax();
-		dequeue();
-
-		return obj;
-	}
-
-	public T darMax() 
-	{
-		Iterator<T> iter = this.iterator();
-		T nodoC =  (T) iter.next();	
-		T nodoP =  nodoC;
-
-		while(iter.hasNext()) {
-			if(nodoC.compareTo(nodoP) > 1)
-			{
-				nodoP=nodoC;
-			}
-			nodoC = (T) iter.next();	
-		}
-
-		Node <T> ultimo = primerNode;
-		ultimo.setNextNode(primerNode);
-		primerNode.setItem(nodoC);
-
-		return nodoC;
 	}
 }

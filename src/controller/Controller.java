@@ -3,6 +3,7 @@ package controller;
 import java.io.FileReader;
 
 
+
 import java.util.Scanner;
 
 import org.json.simple.JSONArray;
@@ -15,7 +16,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
 
-import model.data_structures.MaxColaCP;
+import model.data_structures.ArbolRojoNegro;
+
 import model.logic.Comparendos;
 import model.logic.Modelo;
 import view.View;
@@ -25,7 +27,7 @@ public class Controller {
 	/*
 	 * 
 	 */
-	private MaxColaCP<Comparendos> listaComparendos;
+	private ArbolRojoNegro<String,Comparendos> listaComparendos;
 
 	/* Instancia del Modelo*/
 	private Modelo modelo;
@@ -42,7 +44,7 @@ public class Controller {
 	 */
 	public Controller()
 	{
-		listaComparendos= new MaxColaCP<Comparendos>();
+		listaComparendos= new ArbolRojoNegro<String,Comparendos>();
 		view = new View();
 		modelo = new Modelo();
 	}
@@ -51,7 +53,6 @@ public class Controller {
 	public void run() 
 	{
 		Scanner lector = new Scanner(System.in);
-		Comparable<Comparendos>[] arreglos = new Comparendos[listaComparendos.darNumElementos()];
 		boolean fin = false;
 		Integer n = null;
 		Integer i = 1;
@@ -70,38 +71,7 @@ public class Controller {
 				modelo.loadComparendos(ruta);
 				System.out.println("--------- \nDar N comparendos a buscar: ");
 				n = lector.nextInt();
-				modelo.muestra(n);
 				System.out.println("Numero actual de elementos " + modelo.numeroComparendos() + "\n---------");	
-				break;
-
-			case 1:
-
-				System.out.println("--------- \nDar N comparendos a buscar: ");
-				n = lector.nextInt();
-				System.out.println("--------- \nDar Clase comparendos a buscar (Solo una): ");
-				tipo = lector.next();
-				
-				long tiempoI = System.nanoTime();
-				modelo.comparendosMasNorteMaxCola(n, tipo);
-				long tiempoF = System.nanoTime();
-				double demora = (tiempoF - tiempoI)/ 1e6;
-				System.out.println("diez mas al norte");
-				System.out.println("Tiempo de demora: " + demora);
-				break;
-
-			case 2:
-
-				System.out.println("--------- \nDar N comparendos a buscar: ");
-				n = lector.nextInt();
-				System.out.println("--------- \nDar Clase comparendos a buscar (Solo una): ");
-				tipo = lector.next();
-				long tiempoIH = System.nanoTime();
-				modelo.comparendosMasNorteMaxHeap(n, tipo);
-				long tiempoFH = System.nanoTime();
-				double demoraH = (tiempoFH - tiempoIH)/ 1e6;
-				System.out.println("diez mas al norte");
-				System.out.println("Tiempo de demora: " + demoraH);
-
 				break;
 
 			default: 
