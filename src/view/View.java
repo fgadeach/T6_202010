@@ -16,8 +16,8 @@ public class View
 	public void printMenu()
 	{
 		System.out.println("0. Carga de datos.");
-		System.out.println("1. Mostrar N comparendos mas al norte (MaxCola).");
-		System.out.println("2. Mostrar N comparendos mas al norte (MaxHeap).");
+		System.out.println("1. Consultar un comparendo por id.");
+		System.out.println("2. Consultar los comparendos con un id en un rango específico.");
 	}
 
 	public void printMessage(String mensaje) {

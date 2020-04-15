@@ -25,7 +25,6 @@ import model.data_structures.Node;
 public class Modelo {
 
 	private ArbolRojoNegro<String,Comparendos> listaComparendos = new ArbolRojoNegro<>();
-	int numeroElementos = 0;
 
 	public void loadComparendos (String comparendosFile)
 	{
@@ -43,7 +42,8 @@ public class Modelo {
 				JSONObject geometry =  (JSONObject) comp.get("geometry");
 				JSONArray coordinates = (JSONArray) geometry.get("coordinates");
 				Comparendos comparendo = new Comparendos(String.valueOf(comp.get("type")), Integer.parseInt(String.valueOf(properties.get("OBJECTID"))), String.valueOf(properties.get("FECHA_HORA")), String.valueOf(properties.get("CLASE_VEHI")), String.valueOf(properties.get("TIPO_SERVI")), String.valueOf(properties.get("INFRACCION")), String.valueOf(properties.get("DES_INFRAC")), String.valueOf(properties.get("LOCALIDAD")), String.valueOf(geometry.get("type")), String.valueOf(coordinates));
-				//listaComparendos.add(comparendo);
+				String objectId = Integer.toString(comparendo.getOBJECTID());			
+				listaComparendos.put(objectId, comparendo);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -55,10 +55,37 @@ public class Modelo {
 		}
 	}
 
-
 	public int numeroComparendos() 
 	{
-		return numeroElementos;
+		return listaComparendos.size();
+	}
+	public String valorMinimoObjectId() 
+	{
+		return listaComparendos.min();	
+	}
+	public String valorMaximoObjectId() 
+	{
+		return listaComparendos.max();	
+	}
+
+	public String buscarComparendoId(String id) 
+	{
+		Comparendos comparendo = listaComparendos.get(id);
+		
+		
+		return "OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\n CLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION();
+	}
+
+	public void consultarComparendosRango(String idMenor, String idMayor) 
+	{
+		Iterator<String> iter = listaComparendos.keysInRange(idMenor, idMayor);
+		System.out.println(iter.hasNext());
+		while(iter.hasNext()) 
+		{	
+			String llave = iter.next();
+			Comparendos comparendo = listaComparendos.get(llave);
+			System.out.println("OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\n CLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION());
+		}
 	}
 
 

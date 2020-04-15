@@ -1,6 +1,7 @@
 package model.data_structures;
 
 import java.util.Iterator;
+
 import java.util.NoSuchElementException;
 
 public class ArbolRojoNegro <K extends Comparable<K>,V extends Comparable<V>> implements IArbolRojoNegro<K, V>
@@ -29,7 +30,7 @@ public class ArbolRojoNegro <K extends Comparable<K>,V extends Comparable<V>> im
 		public V darValue()
 		{
 			return value;
-		}
+		}	
 	}
 
 	public ArbolRojoNegro() 
@@ -388,12 +389,12 @@ public class ArbolRojoNegro <K extends Comparable<K>,V extends Comparable<V>> im
 		if (nodo == null) return new Node(key, val, 1,RED);
 
 		int compare = key.compareTo(nodo.key);
-		if (compare < 0) 
+		if (compare > 0) 
 		{
 			nodo.left  = put(nodo.left,  key, val); 
 		}
 
-		else if (compare > 0)
+		else if (compare < 0)
 		{
 			nodo.right = put(nodo.right, key, val); 
 		}

@@ -44,7 +44,7 @@ public class Controller {
 	 */
 	public Controller()
 	{
-		listaComparendos= new ArbolRojoNegro<String,Comparendos>();
+		listaComparendos = new ArbolRojoNegro<String,Comparendos>();
 		view = new View();
 		modelo = new Modelo();
 	}
@@ -54,7 +54,8 @@ public class Controller {
 	{
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
-		Integer n = null;
+		String n = null;
+		String m = null;
 		Integer i = 1;
 		Object datoS = null;
 		String respuesta = "";
@@ -66,12 +67,26 @@ public class Controller {
 
 			int option = lector.nextInt();
 			switch(option){
+			
 			case 0:
 				modelo = new Modelo(); 
 				modelo.loadComparendos(ruta);
-				System.out.println("--------- \nDar N comparendos a buscar: ");
-				n = lector.nextInt();
 				System.out.println("Numero actual de elementos " + modelo.numeroComparendos() + "\n---------");	
+				System.out.println("Valor minimo OBJECTID " + modelo.valorMinimoObjectId() + "\n---------");	
+				System.out.println("Valor maximo OBJECTID " + modelo.valorMaximoObjectId() + "\n---------");	
+				break;
+			case 1:
+				System.out.println("--------- \nDar ObjectID: ");
+				n = lector.next();
+				modelo.buscarComparendoId(n);
+				break;
+			case 2:
+				System.out.println("--------- \nDar ObjectID minimo: ");
+				n = lector.next();
+				System.out.println("--------- \nDar ObjectID maximo: ");
+				m = lector.next();
+
+				modelo.consultarComparendosRango(n, m);	
 				break;
 
 			default: 
