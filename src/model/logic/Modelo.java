@@ -2,6 +2,7 @@ package model.logic;
 
 import java.awt.List;
 
+
 import java.io.FileNotFoundException;
 
 import java.io.FileReader;
@@ -16,7 +17,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import model.data_structures.ArbolRojoNegro;
-import model.data_structures.Node;
+
 
 /**
  * Definicion del modelo del mundo
@@ -68,12 +69,11 @@ public class Modelo {
 		return listaComparendos.max();	
 	}
 
-	public String buscarComparendoId(String id) 
+	public void buscarComparendoId(String id) 
 	{
 		Comparendos comparendo = listaComparendos.get(id);
-		
-		
-		return "OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\n CLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION();
+
+		System.out.println("OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\nCLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION());
 	}
 
 	public void consultarComparendosRango(String idMenor, String idMayor) 
@@ -84,7 +84,7 @@ public class Modelo {
 		{	
 			String llave = iter.next();
 			Comparendos comparendo = listaComparendos.get(llave);
-			System.out.println("OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\n CLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION());
+			System.out.println("OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\nCLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION());
 		}
 	}
 

@@ -3,70 +3,75 @@ package model.data_structures;
 import java.util.Iterator;
 
 public class Queue <T extends Comparable<T>> implements IQueue<T>{
-	//ATRIBUTOS
-	private int tamano;
-	private Node<T> primerNode;
-	private Node<T> ultimoNode;
+	private int size;
+	private Nodo<T> primerNodo;
+	private Nodo<T> ultimoNodo;
 	
-	//CONSTRUCTORES
 	public Queue()
 	{
-		primerNode = null;
-		ultimoNode = null;
-		tamano = 0;
+		primerNodo = null;
+		ultimoNodo = null;
+		size = 0;
 	}
 	
 	public Queue(T item)
 	{
-		primerNode = new Node<T>(item);
-		ultimoNode = new Node<T>(item);
-		tamano =1;
+		primerNodo = new Nodo<T>(item);
+		ultimoNodo = new Nodo<T>(item);
+		size =1;
 	}
 	
-	//METODOS
-	public Node<T> darPrimero()
+	public Nodo<T> darPrimero()
 	{
-		return primerNode;
+		return primerNodo;
 	}
 	
-	public Node<T> darUltimo()
+	public Nodo<T> darUltimo()
 	{
-		return ultimoNode;
+		return ultimoNodo;
 	}
 	
 	public boolean isEmpty() 
 	{
-		boolean respuesta = false;	
-		if (tamano >= 1)
+		boolean respuesta =false;
+		
+		if (size >= 1)
+		{
 			respuesta =false;
+		}
+		
 		else
+		{
 			respuesta = true;
+		}
 		return respuesta;
 	}
 
 	@Override
-	public int tamano() 
+	public int size() 
 	{
-		return tamano;
+		return size;
 	}
 	
 	@Override
 	public void enqueue (T t) 
 	{
-		Node <T> contenedor = new Node <T>(t);
-		if (tamano == 0)
+		Nodo <T> nuevo = new Nodo <T>(t);
+		
+		if (size==0)
 		{
-			primerNode = contenedor;
-			ultimoNode = contenedor;
-		}
-		else
-		{
-			Node <T> ultimo = ultimoNode;
-			ultimo.cambiarSiguiente(contenedor);
-			ultimoNode = contenedor;
+			primerNodo = nuevo;
+			ultimoNodo = nuevo;
 		}
 		
-		tamano++;
+		else
+		{
+			Nodo <T> ultimo = ultimoNodo;
+			ultimo.cambiarSiguiente(nuevo);
+			ultimoNodo = nuevo;
+		}
+		
+		size++;
 	}
 
 	@Override
@@ -74,18 +79,18 @@ public class Queue <T extends Comparable<T>> implements IQueue<T>{
 	{
 		T sacado = null;
 		
-		if (tamano ==0)
+		if (size ==0)
 		{
 			System.out.println("No hay elementos para quitar de la fila");
 		}
 		
 		else
 		{
-			Node <T> primero = primerNode;
-			sacado = primerNode.darItem();
-			primerNode = primero.darSiguiente();
+			Nodo <T> primero = primerNodo;
+			sacado = primerNodo.darItem();
+			primerNodo = primero.darSiguiente();
 			primero.cambiarSiguiente(null);
-			tamano --;
+			size --;
 		}
 		
 		return sacado;
@@ -95,11 +100,11 @@ public class Queue <T extends Comparable<T>> implements IQueue<T>{
 	public Iterator<T> iterator() 
 	{
 		return new Iterator<T>() {
-			Node<T> act = null;
+			Nodo<T> act = null;
 
 			@Override
 			public boolean hasNext() {
-				if (tamano == 0) {
+				if (size == 0) {
 					return false;
 				}
 				
@@ -113,7 +118,7 @@ public class Queue <T extends Comparable<T>> implements IQueue<T>{
 			@Override
 			public T next() {
 				if (act == null) {
-					act = primerNode;
+					act = primerNodo;
 				} else {
 					act = act.darSiguiente();
 				}
@@ -122,4 +127,6 @@ public class Queue <T extends Comparable<T>> implements IQueue<T>{
 			}
 		};
 	}
+
+
 }
