@@ -87,6 +87,12 @@ public class Modelo {
 			System.out.println("OBJECTID: " + comparendo.getOBJECTID() + "\nFECHA_HORA: " + comparendo.getFECHA_HORA() + "\nTIPO_SERVI: " + comparendo.getTIPO_SERVI() + "\nCLASE_VEHI: " + comparendo.getCLASE_VEHI() + "\nINFRACCION: " + comparendo.getINFRACCION());
 		}
 	}
+	
+	public void datosR() 
+	{
+		System.out.println("Altura" + listaComparendos.altura());
+		System.out.println("Total nodos" + listaComparendos.size());
+	}
 
 
 }

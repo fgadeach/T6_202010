@@ -71,6 +71,7 @@ public class Controller {
 			case 0:
 				modelo = new Modelo(); 
 				modelo.loadComparendos(ruta);
+				modelo.datosR();
 				System.out.println("Numero actual de elementos " + modelo.numeroComparendos() + "\n---------");	
 				System.out.println("Valor minimo OBJECTID " + modelo.valorMinimoObjectId() + "\n---------");	
 				System.out.println("Valor maximo OBJECTID " + modelo.valorMaximoObjectId() + "\n---------");	
